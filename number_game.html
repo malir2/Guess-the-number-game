@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Number</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AT:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Playwrite+AT:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Playwrite+AT:ital,wght@0,100..400;1,100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+AT:ital,wght@0,100..400;1,100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            padding: 50px;
+            height: 100vh;
+            background: linear-gradient(to left, rgb(255, 255, 255) 50%, rgb(14, 165, 233) 50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .container{
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .container h1{
+            
+            font-family: "Playwrite AT", cursive;
+            text-align: center;
+            font-weight: bold;
+            font-size: 40px;
+           
+        }
+
+        .game-instruction{
+            font-family: "Edu AU VIC WA NT Hand", cursive;
+            text-align: center;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        form{
+            
+            border: 1px solid black;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to right, rgb(255, 255, 255) 50%, rgb(14, 165, 233) 50%);
+        }
+
+        label{
+            font-size: 20px;
+            font-weight: 500;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        #numberInput{
+            margin-top: 10px;
+            padding: 7px;
+            font-size: 14px;
+            border: 1px solid gray;
+            border-radius: 8px;
+            font-family: "Edu AU VIC WA NT Hand", cursive;
+            font-weight: bold;
+        }
+
+        .error-message{
+            font-size: 12px;
+            font-family: "Edu AU VIC WA NT Hand", cursive;
+            color: red;
+            font-weight: 600;
+            word-spacing: 2px;
+        }
+
+        #submit{
+            margin: 20px auto 0;
+            padding: 5px;
+            width: 100px;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 1px solid black;
+            background: linear-gradient(to left, rgb(255, 255, 255) 50%, rgb(14, 165, 233) 50%);
+            cursor: pointer;
+        }
+
+        .info-section{
+            margin-top: 30px;
+            font-family: "Josefin Sans", sans-serif;
+            
+        }
+
+        .info-section p{
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .play-again{
+            margin: 20px auto 0;
+            padding: 10px;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 1px solid black;
+            background: linear-gradient(to right, rgb(255, 255, 255) 50%, rgb(14, 165, 233) 50%);
+        }
+
+        .win-section{
+            text-align: center; 
+            text-wrap: wrap;
+            margin-top: 20px;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .failed-section{
+            font-size: 18px;
+            color: red;
+            font-weight: 700;
+        }
+
+        button{
+            cursor: pointer;
+        }
+
+        .guess-note{
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: center;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        .help{
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 600px){
+            .container{
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 550px){
+            .container{
+                width: 100%;
+            }
+
+            body{
+                padding: 10px;
+            }
+
+            .info-section{
+                font-size: 12px;
+            }
+
+            .failed-section{
+            font-size: 14px;
+            color: red;
+            font-weight: 700;
+        }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guess the Number</h1>
+        <p class="game-instruction">Guess the number between 1 and 20. You have only 10 attempts. <br> Best of luck!</p>
+        <form action="">
+            <label for="numberInput">Enter the number:</label>
+            <input type="text" id="numberInput">
+            <p class="error-message"></p>
+            <input type="submit" value="Check" id="submit">
+        </form>
+        <div class="guess-note"><span class="help">Help: </span><span class="help-notes"></span></div>
+        <div class="info-section">
+        <p><span>Your previous guesses were:</span> <span class="previous-guess"></span></p>
+        <p><span>Your attempts left:</span> <span class="attempts-left"></span></p>
+        <p class="win-section"></p>
+        <p class="failed-section"><span class="fail-note"> </span><span class="correct-number"></span></p>
+        <button class="play-again">Play Again</button>
+    </div>
+    </div>
+</body>
+<script>
+
+    let randomNumber = Math.floor(Math.random() * 20 + 1);
+    // console.log(randomNumber)
+
+    const inputValue = document.querySelector("#numberInput");
+    const errMessage = document.querySelector(".error-message");
+
+    const submitButton = document.querySelector("#submit");
+    const previousGuess = document.querySelector(".previous-guess");
+    const attemptLeft = document.querySelector('.attempts-left');
+
+    const helpNotes = document.querySelector(".help-notes");
+    const winMessage = document.querySelector(".win-section")
+    const failedSection = document.querySelector(".fail-note");
+    const correctNumber = document.querySelector(".correct-number")
+    const playAgainBtn = document.querySelector(".play-again");
+
+    const angry = "😡";
+    const angry2= "🤬";
+    const silence = "😑";
+    const ok = "😒";
+    const think = "🤔";
+    const anexity = "😱";
+    const cant = "😩";
+    const laugh = "😂";
+    const irritate ="😁";
+    const cry = "😭";
+
+
+    let playgame = true;
+    let allEnterNumber = []
+
+    attemptLeft.innerText = 10
+
+    playAgainBtn.style.display = "none";
+
+    
+
+    if (playgame) {
+        submitButton.addEventListener('click',(e)=>{
+        e.preventDefault();
+        
+        const guess = parseInt(inputValue.value);
+        errMessage.innerText = "";
+        valueChecker(guess);
+    })
+    } else {
+        endGame();
+    }
+
+    
+
+    function valueChecker(guess) {
+        if (guess === randomNumber) {
+            const emoji = "🎉";
+            winMessage.innerText = `Congratulations! You guess the right answer ${emoji}. And I lose ${cry}`;
+            inputValue.disabled = true;
+            submitButton.disabled = true;
+            inputValue.value = randomNumber;
+            errMessage.innerText = "";
+            helpNotes.innerText = "";
+            playAgain();
+        }else if(guess < 1){
+            errMessage.innerText = `*Number should be 1 or greater than 1${angry}`
+            inputValue.value = ''
+        }else if(guess >20){
+            errMessage.innerText = `*Number should be 20 or smaller tha 20${angry}`
+            inputValue.value = ''
+        }else if(isNaN(guess)){
+            errMessage.innerText = `*Value should be a number${angry2}`
+            inputValue.value = ''
+        }else if (randomNumber - guess >= 10 || randomNumber - guess  <= -10) {
+          
+            helpNotes.innerText = `I suggest you to quiet right now${irritate}`;
+            inputValue.value = ''
+            allEnterNumber.push(guess);
+            previousGuesses(guess);
+        }
+        else if (randomNumber - guess >= 6 || randomNumber - guess <= -6) {
+            
+            helpNotes.innerText = `I think so you are not a good player ${silence}`;
+            inputValue.value = ''
+            allEnterNumber.push(guess);
+            previousGuesses(guess);
+        }else if (randomNumber - guess >= 4 || randomNumber - guess <= -4) {
+            
+            helpNotes.innerText = `You are ok somehow ${ok}`;
+            inputValue.value = ''
+            allEnterNumber.push(guess);
+            previousGuesses(guess);
+        }
+        else if (randomNumber - guess === 3 || randomNumber - guess === -3) {
+
+            helpNotes.innerText = `How you come close to the right number${think}`;
+            inputValue.value = ''
+            allEnterNumber.push(guess);
+            previousGuesses(guess);
+        }else if ( randomNumber - guess === 2 || randomNumber - guess === -2) {
+            helpNotes.innerText = `No you can't win this${cant}`;
+            
+            inputValue.value = ''
+            allEnterNumber.push(guess);
+            previousGuesses(guess);
+        }else if (randomNumber - guess === 1 || randomNumber - guess === -1) {
+            helpNotes.innerText = `You are too close${anexity}`;
+            inputValue.value = ''
+            allEnterNumber.push(guess);
+            previousGuesses(guess);
+        }
+        // else if (guess > randomNumber) {
+        //     errMessage.innerText = "*Value is greater than real number";
+        //     inputValue.value = ''
+        //     allEnterNumber.push(guess);
+        //     previousGuesses(guess);
+        // }
+    }
+
+    function previousGuesses(guess) {
+        previousGuess.innerHTML= allEnterNumber;
+        attemptLeftFn();
+    }
+
+    function attemptLeftFn() {
+        let attempts = 10 - allEnterNumber.length;
+        attemptLeft.innerText = attempts ;
+
+        // console.log(attempts);
+
+        if (attempts === 0) {
+            endGame();
+        }
+    }
+
+    function endGame() {
+      playgame = false;
+      failedSection.innerText = "The correct number was: "; 
+      winMessage.innerText = `What a fool I made of you${laugh}`;
+      correctNumber.innerText = randomNumber;
+      inputValue.disabled = true;
+      submitButton.disabled = true;
+      helpNotes.innerText = "";
+      playAgain();
+    }
+
+    function playAgain() {
+        playAgainBtn.style.display = "block";
+        playAgainBtn.addEventListener('click', (e)=>{
+            randomNumber = Math.floor(Math.random() * 20 + 1);
+            allEnterNumber = [];
+            previousGuess.innerText = "";
+            attemptLeft.innerText = 10;
+            failedSection.innerText = "";
+            inputValue.value = "";
+            winMessage.innerText = "";
+            errMessage.innerText = "";
+            correctNumber.innerText = "";
+            helpNotes.innerText = "";
+            inputValue.disabled = false;
+            submitButton.disabled = false;
+            playAgainBtn.style.display = "none";
+            playgame = true
+            // console.log(randomNumber);
+        })
+    }
+
+</script>
+</html>
